@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>送你一句祝福</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      overflow: hidden;
+      font-family: "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, #fff7c8 0, transparent 28%),
+        radial-gradient(circle at 80% 80%, #ffcadd 0, transparent 30%),
+        linear-gradient(135deg, #fff4df, #ffdce8);
+    }
+
+    .decoration {
+      position: fixed;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 30px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .d1 {
+      top: 10%;
+      left: 10%;
+    }
+
+    .d2 {
+      top: 18%;
+      right: 12%;
+      animation-delay: 1s;
+    }
+
+    .d3 {
+      bottom: 12%;
+      left: 15%;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-12px) rotate(8deg);
+      }
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 430px;
+      padding: 42px 28px 34px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 28px;
+      box-shadow: 0 18px 50px rgba(177, 91, 119, 0.18);
+      backdrop-filter: blur(10px);
+    }
+
+    .icon {
+      font-size: 46px;
+      animation: shine 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes shine {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.12);
+      }
+    }
+
+    h1 {
+      margin: 14px 0 8px;
+      color: #d65d7a;
+      font-size: 26px;
+    }
+
+    .tip {
+      margin: 0;
+      color: #a47a84;
+      font-size: 14px;
+    }
+
+    #blessing {
+      min-height: 110px;
+      margin: 28px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #4f3e43;
+      font-size: 22px;
+      font-weight: bold;
+      line-height: 1.8;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    #blessing.changing {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 999px;
+      color: white;
+      background: linear-gradient(135deg, #ef829a, #dd5f7d);
+      box-shadow: 0 8px 20px rgba(221, 95, 125, 0.25);
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .footer {
+      margin-top: 20px;
+      color: #ba969f;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="decoration d1">✦</div>
+  <div class="decoration d2">♡</div>
+  <div class="decoration d3">✿</div>
+
+  <main class="card">
+    <div class="icon">🎁</div>
+
+    <h1>送你一句祝福</h1>
+
+    <p class="tip">你与这句祝福的相遇并非偶然</p>
+
+    <div id="blessing"></div>
+
+    <button onclick="changeBlessing()">再抽一句</button>
+
+    <div class="footer">愿这份小小的幸运陪伴你</div>
+  </main>
+
+  <script>
+    const blessings = [
+      "愿你今天遇见的，都是温柔与好运。",
+      "愿你的努力，都在未来开花结果。",
+      "保持期待，好事正在赶来的路上。",
+      "愿你眼里有光，心中有梦，脚下有路。",
+      "今天也要相信自己，你比想象中更厉害。",
+      "愿所有遗憾，都成为未来惊喜的铺垫。",
+      "愿你逢考必过，做题都会，蒙的全对。",
+      "愿你认真生活，也被生活温柔以待。",
+      "愿你所求皆如愿，所行皆坦途。",
+      "愿今天的你，比昨天多一点快乐。",
+      "愿你一路有花、有光，也有人懂。",
+      "愿你不慌不忙，成为自己喜欢的模样。",
+      "愿你的每一次坚持，都不会被辜负。",
+      "愿烦恼及时清零，好运持续加载。",
+      "愿你有前进的勇气，也有休息的底气。",
+      "愿你走过的每一步，都离梦想更近一些。",
+      "愿你平安喜乐，万事胜意。",
+      "愿普通的日子里，也藏着意想不到的惊喜。",
+      "愿你心有所期，忙而不茫。",
+      "恭喜你抽中今日隐藏祝福：接下来会有好事发生！"
+    ];
+
+    let lastIndex = -1;
+
+    function getRandomIndex() {
+      let index;
+
+      do {
+        index = Math.floor(Math.random() * blessings.length);
+      } while (index === lastIndex);
+
+      lastIndex = index;
+      return index;
+    }
+
+    function showBlessing() {
+      const blessingBox = document.getElementById("blessing");
+      blessingBox.textContent = blessings[getRandomIndex()];
+    }
+
+    function changeBlessing() {
+      const blessingBox = document.getElementById("blessing");
+      blessingBox.classList.add("changing");
+
+      setTimeout(() => {
+        showBlessing();
+        blessingBox.classList.remove("changing");
+      }, 250);
+    }
+
+    showBlessing();
+  </script>
+</body>
+</html>
