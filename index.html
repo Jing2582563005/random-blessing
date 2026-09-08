@@ -17,10 +17,13 @@
       margin: 0;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      gap: 20px;
       padding: 24px;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       font-family: "Microsoft YaHei", sans-serif;
       background:
         radial-gradient(circle at 20% 20%, #fff7c8 0, transparent 28%),
@@ -60,6 +63,17 @@
       50% {
         transform: translateY(-12px) rotate(8deg);
       }
+    }
+
+    .top-picture {
+      position: relative;
+      z-index: 1;
+      width: clamp(110px, 28vw, 150px);
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 5px solid rgba(255, 255, 255, 0.92);
+      border-radius: 50%;
+      box-shadow: 0 12px 30px rgba(177, 91, 119, 0.2);
     }
 
     .card {
@@ -127,6 +141,8 @@
   <div class="decoration d1">✦</div>
   <div class="decoration d2">♡</div>
   <div class="decoration d3">✿</div>
+
+  <img class="top-picture" src="picture.jpg" alt="教师节祝福图片">
 
   <main class="card">
     <div class="icon">🎁</div>
